@@ -1,2 +1,1 @@
-testing new dog.txt item
-test
+major
