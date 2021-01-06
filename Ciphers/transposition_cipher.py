@@ -12,9 +12,7 @@ decipher = "" #used to store the decrypted text from cipher, in the decrypting p
 #																	  	#
 # MY METHOD FOR ENCRYPTING "plain" WITH THE TRANSPOSITION CIPHER METHOD	#
 #																		#
-#########################################################################																	    #
-
-
+#########################################################################
 for cols in range(encrypt_key):		#Loop over each column. The number of columns is determined by the encyrption key
 	for rows in range(ceil(len(plain)/encrypt_key)):#the number of rows of the transposition cipher is related to the length of the plain-text divided by the encyrpt-key value rounded up
 		if (rows*encrypt_key + cols) >= len(plain):		#This accounts for the "blank" cells of the transposition cipher... skip them
