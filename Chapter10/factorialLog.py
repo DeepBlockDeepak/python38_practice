@@ -2,7 +2,7 @@ import logging
 #Include the following line to remove all log messages within the script
 #logging.disable(logging.CRITICAL)
 
-#following are the logging levels following loggin.debug()
+#following are the logging levels following logging.debug()
 """logging.info("")
 logging.warning("")
 logging.error("")
