@@ -13,13 +13,16 @@ decipher = "" #used to store the decrypted text from cipher, in the decrypting p
 # MY METHOD FOR ENCRYPTING "plain" WITH THE TRANSPOSITION CIPHER METHOD	#
 #																		#
 #########################################################################
-for cols in range(encrypt_key):		#Loop over each column. The number of columns is determined by the encyrption key
-	for rows in range(ceil(len(plain)/encrypt_key)):#the number of rows of the transposition cipher is related to the length of the plain-text divided by the encyrpt-key value rounded up
-		if (rows*encrypt_key + cols) >= len(plain):		#This accounts for the "blank" cells of the transposition cipher... skip them
-			continue
-		cipher += plain[rows*encrypt_key + cols]			#access the appropriate char of the transposition cipher "grid"
 
-print("\nCipher key = {}\n\"{}\" encrypts to:\n\"{}\"".format(encrypt_key, plain, cipher))
+def transposition_encrypt(encrypt_key, plain):
+
+	for cols in range(encrypt_key):		#Loop over each column. The number of columns is determined by the encyrption key
+		for rows in range(ceil(len(plain)/encrypt_key)):#the number of rows of the transposition cipher is related to the length of the plain-text divided by the encyrpt-key value rounded up
+			if (rows*encrypt_key + cols) >= len(plain):		#This accounts for the "blank" cells of the transposition cipher... skip them
+				continue
+			cipher += plain[rows*encrypt_key + cols]			#access the appropriate char of the transposition cipher "grid"
+
+	print("\nCipher key = {}\n\"{}\" encrypts to:\n\"{}\"".format(encrypt_key, plain, cipher))
 
 
 """
@@ -78,30 +81,32 @@ print("\n")
 #                       Cracking Codes Decryption Solution                 #
 ############################################################################
 
-column = 0
-row = 0
-#encrypt_key = 5
+def transposition_decrypt(encrypt_key, cipher):
+	
+	column = 0
+	row = 0
+	#encrypt_key = 5
 
-plain = ['']*ceil(len(cipher)/encrypt_key)
+	plain = ['']*ceil(len(cipher)/encrypt_key)
 
-numOfRows = encrypt_key
-numOfColumns = ceil(len(cipher)/encrypt_key)
+	numOfRows = encrypt_key
+	numOfColumns = ceil(len(cipher)/encrypt_key)
 
 
-for symbol in cipher:			#loop through each char in the cipher
-	plain[column] += symbol		#assign the char to each sub-string member of 'plain', according to the 'column' index
-	column += 1					#iterate the column index
+	for symbol in cipher:			#loop through each char in the cipher
+		plain[column] += symbol		#assign the char to each sub-string member of 'plain', according to the 'column' index
+		column += 1					#iterate the column index
 
-	if (
-		(column == numOfColumns) or		#'column' is not allowed to go out of range, so reset it to 0
-		(column == numOfColumns - 1 and row >= numOfRows - (numOfRows * numOfColumns - len(cipher)))	#when the invalid, 'shaded boxes' are encountered
-	):
-		column = 0
-		row +=1		#for an encryption-key/numOfRows value == 5, and string length == 37... only rows 0 & 1 are allowed (2,3,4 are 'shaded')
+		if (
+			(column == numOfColumns) or		#'column' is not allowed to go out of range, so reset it to 0
+			(column == numOfColumns - 1 and row >= numOfRows - (numOfRows * numOfColumns - len(cipher)))	#when the invalid, 'shaded boxes' are encountered
+		):
+			column = 0
+			row +=1		#for an encryption-key/numOfRows value == 5, and string length == 37... only rows 0 & 1 are allowed (2,3,4 are 'shaded')
 
-decipher = "".join(plain)
+	decipher = "".join(plain)
 
-print("\n")
+	print("\n")
 print("\n\"{}\" decrypts to:\n\"{}\"".format(cipher, decipher))
 
 
