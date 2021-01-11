@@ -1,11 +1,10 @@
 #!python3
 from math import ceil, floor	#ceil() used because it obtains the number of rows needed for the transposition cipher
 
+
 encrypt_key = 5 #... the encrytpion key
 
-plain = "Sphinx of black quartz, judge my vow."  #plain-text, pre encrypted
-cipher = ""	#will be used to store the encrypted plain-text
-decipher = "" #used to store the decrypted text from cipher, in the decrypting process
+plain = "Sphinx of black quartz, judge my vow.fotjldkjlskdjfosijlkdjdoisjekflkwejeowjeowfiej"  #plain-text, pre encrypted
 
 
 #########################################################################
@@ -15,6 +14,8 @@ decipher = "" #used to store the decrypted text from cipher, in the decrypting p
 #########################################################################
 
 def transposition_encrypt(encrypt_key, plain):
+	
+	cipher = ""	#will be used to store the encrypted plain-text
 
 	for cols in range(encrypt_key):		#Loop over each column. The number of columns is determined by the encyrption key
 		for rows in range(ceil(len(plain)/encrypt_key)):#the number of rows of the transposition cipher is related to the length of the plain-text divided by the encyrpt-key value rounded up
@@ -22,8 +23,8 @@ def transposition_encrypt(encrypt_key, plain):
 				continue
 			cipher += plain[rows*encrypt_key + cols]			#access the appropriate char of the transposition cipher "grid"
 
-	print("\nCipher key = {}\n\"{}\" encrypts to:\n\"{}\"".format(encrypt_key, plain, cipher))
-
+	#print("\nCipher key = {}\n\"{}\" encrypts to:\n\"{}\"".format(encrypt_key, plain, cipher))
+	return cipher
 
 """
 #########################################################################
@@ -82,6 +83,8 @@ print("\n")
 ############################################################################
 
 def transposition_decrypt(encrypt_key, cipher):
+
+	decipher = "" #used to store the decrypted text from cipher, in the decrypting process
 	
 	column = 0
 	row = 0
@@ -106,7 +109,11 @@ def transposition_decrypt(encrypt_key, cipher):
 
 	decipher = "".join(plain)
 
-	print("\n")
-print("\n\"{}\" decrypts to:\n\"{}\"".format(cipher, decipher))
+	#print("\n\"{}\" decrypts to:\n\"{}\"".format(cipher, decipher))
+	return decipher
+
+cipher = transposition_encrypt(encrypt_key, plain)
+decipher = transposition_decrypt(encrypt_key, cipher)
 
 
+#print("\n\"{}\" decrypts  to \n\"{}\" when the encrypt_key of {} is used.".format(cipher, decipher, encrypt_key))
