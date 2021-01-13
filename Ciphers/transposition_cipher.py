@@ -4,7 +4,7 @@ from math import ceil, floor	#ceil() used because it obtains the number of rows 
 
 encrypt_key = 5 #... the encrytpion key
 
-plain = "Sphinx of black quartz, judge my vow.fotjldkjlskdjfosijlkdjdoisjekflkwejeowjeowfiej"  #plain-text, pre encrypted
+plain = "Sphinx of black quartz, judge my vow."  #plain-text, pre encrypted
 
 
 #########################################################################
