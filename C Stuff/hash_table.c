@@ -39,10 +39,16 @@ int main(){
 
     print_hash_table(&hash_table);
     
+
+    /**
+     * @brief Initially had a weird non-bug issue, because "&mpho" was passsed as the first paramter of find_person()
+     *          and the code still compiled, even though it seems like it shouldn't have
+     * 
+     */
     printf(
-    find_person(&mpho, &hash_table) ? "%s found in the array\n" : 
+    find_person((&mpho)->name, &hash_table) ? "%s found in the array\n" : 
     "Didn't find that person\n",
-    (find_person(&mpho, &hash_table))->name
+    (find_person((&mpho)->name, &hash_table))->name
     );
 
     /*
