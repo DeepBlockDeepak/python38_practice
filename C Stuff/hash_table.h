@@ -80,7 +80,7 @@ void insert_person_hash_table(struct person_t *person ,struct person_t **table){
     return;
 }
 
-void delete_person_hash_table
+//void delete_person_hash_table
 
 
 
