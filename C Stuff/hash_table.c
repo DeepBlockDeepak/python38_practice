@@ -27,15 +27,15 @@ int main(){
     struct person_t jane = {.name = "Jane", .age = 75};
 
 
-    insert_hash_table(&jacob, &hash_table);
-    insert_hash_table(&kate, &hash_table);
-    insert_hash_table(&mpho, &hash_table);
-    insert_hash_table(&sarah, &hash_table);
-    insert_hash_table(&edna, &hash_table);
-    insert_hash_table(&maren, &hash_table);
-    insert_hash_table(&eliza, &hash_table);
-    insert_hash_table(&robert, &hash_table);
-    insert_hash_table(&jane, &hash_table);
+    insert_person_hash_table(&jacob, &hash_table);
+    insert_person_hash_table(&kate, &hash_table);
+    insert_person_hash_table(&mpho, &hash_table);
+    insert_person_hash_table(&sarah, &hash_table);
+    insert_person_hash_table(&edna, &hash_table);
+    insert_person_hash_table(&maren, &hash_table);
+    insert_person_hash_table(&eliza, &hash_table);
+    insert_person_hash_table(&robert, &hash_table);
+    insert_person_hash_table(&jane, &hash_table);
 
     print_hash_table(&hash_table);
     

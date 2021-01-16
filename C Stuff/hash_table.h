@@ -59,29 +59,37 @@ unsigned int hash(char *name){
     
 }
 
-bool insert_hash_table(struct person_t *person ,struct person_t **table){
+
+//It is possible to use 'bool' for the function return type, while returning falses or trues, but it's not needed
+void insert_person_hash_table(struct person_t *person ,struct person_t **table){
 
     if(!(person)){
-        return false;
+        return;
     }
 
     int index = hash(person->name);
 
     //if the element already exists in the table, i.e. it is not NULL
     if(table[index]){
-        return false;
+        return;
     }
 
     //if the element in the table is NULL, assign it a pointer to the person structure
+    //because of the modulo operator in the hash() function, 'index' is limited to approparite values for the table indeces
     table[index] = person;
-    return true;
+    return;
 }
+
+void delete_person_hash_table
+
+
 
 //find a person in the table by their name
 struct person_t* find_person(char* name, struct person_t **table){
     
     int index = hash(name);
 
+    //I'm not sure that the first condition is required in the IF statement
     if((table[index]) && strncmp(name, table[index]->name, MAX_NAME) == 0){
         return table[index];
     }
