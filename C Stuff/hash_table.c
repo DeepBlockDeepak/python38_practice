@@ -10,10 +10,19 @@ int main(){
 
     struct person_t* hash_table[TABLESIZE];
 
-    init_hash_table(&hash_table);
+    /**
+     * @bug     Originally passed '&hash_table' as argument; code compiled but with warning:
+     *               "hash_table.h:27:41: note: expected ‘struct person_t **’ but argument is of type ‘struct person_t * (*)[10]’"
+     *          
+     *          Updated to just 'hash_table' as the argument
+     * 
+     *          ----WHY does the code compile either way? C is usually too finnicky to allow this
+     * 
+     */
+    init_hash_table(hash_table);
 
     printf("-----THE INITAL, NULL TABLE-----\n");
-    print_hash_table(&hash_table);
+    print_hash_table(hash_table);
 
 
     struct person_t jacob = {.name = "Jacob", .age = 256};
@@ -27,17 +36,17 @@ int main(){
     struct person_t jane = {.name = "Jane", .age = 75};
 
 
-    insert_person_hash_table(&jacob, &hash_table);
-    insert_person_hash_table(&kate, &hash_table);
-    insert_person_hash_table(&mpho, &hash_table);
-    insert_person_hash_table(&sarah, &hash_table);
-    insert_person_hash_table(&edna, &hash_table);
-    insert_person_hash_table(&maren, &hash_table);
-    insert_person_hash_table(&eliza, &hash_table);
-    insert_person_hash_table(&robert, &hash_table);
-    insert_person_hash_table(&jane, &hash_table);
+    insert_person_hash_table(&jacob, hash_table);
+    insert_person_hash_table(&kate, hash_table);
+    insert_person_hash_table(&mpho, hash_table);
+    insert_person_hash_table(&sarah, hash_table);
+    insert_person_hash_table(&edna, hash_table);
+    insert_person_hash_table(&maren, hash_table);
+    insert_person_hash_table(&eliza, hash_table);
+    insert_person_hash_table(&robert, hash_table);
+    insert_person_hash_table(&jane, hash_table);
 
-    print_hash_table(&hash_table);
+    print_hash_table(hash_table);
     
 
     /**
@@ -46,9 +55,9 @@ int main(){
      * 
      */
     printf(
-    find_person((&mpho)->name, &hash_table) ? "%s found in the array\n" : 
+    find_person((&mpho)->name, hash_table) ? "%s found in the array\n" : 
     "Didn't find that person\n",
-    (find_person((&mpho)->name, &hash_table))->name
+    (find_person((&mpho)->name, hash_table))->name
     );
 
     /*
