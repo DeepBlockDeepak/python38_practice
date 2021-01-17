@@ -79,6 +79,7 @@ void insert_person_hash_table(struct person_t *person ,struct person_t **table){
             return;
         }
     }
+    return;
 
 }
 
@@ -102,7 +103,7 @@ void delete_person_hash_table(struct person_t *person, struct person_t **table){
         }
     }
     
-    printf("Person not found in the array\n");
+    //printf("Person not found in the array\n");
     return;
 }
 
@@ -115,12 +116,12 @@ struct person_t* find_person(char* name, struct person_t **table){
 
     for (int i = 0; i < TABLESIZE; i++){
         int try_index = (index + i) % TABLESIZE;
-        //I'm not sure that the first condition is required in the IF statement
         if(table[try_index] && strncmp(name, table[try_index]->name, MAX_NAME) == 0){
         //if(table[try_index]->name == name){
             return table[try_index];
         }
     }
+    //I'm not sure that the first condition is required in the IF statement
     //printf("%s was not found in the table\n", name);
     return NULL;
 

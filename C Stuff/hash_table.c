@@ -45,14 +45,10 @@ int main(){
 
     printf("\n-----People Inserted in Hash Table-----\n");
     print_hash_table(hash_table);
-    
 
-    printf(
-    find_person((&mpho)->name, hash_table) ? "%s found in the array\n" : 
-    "Didn't find that person\n",
-    (find_person((&mpho)->name, hash_table))->name
-    );
 
+    //USING DELETE TO DELETE A PERSON STRUCT FROM THE ARRAY OF POINTERS AND CONFIRMING THE REMOVAL WITH FIND_PERSON()
+    /*
     delete_person_hash_table(&mpho, hash_table);
     printf("----DELETED MPHO FROM TABLE---\n");
     print_hash_table(hash_table);
@@ -60,20 +56,22 @@ int main(){
     
     printf(
     find_person((&mpho)->name, hash_table) ? "%s found in the array\n" : 
-    "Didn't find that person\n",
-    (find_person((&mpho)->name, hash_table))->name
+    "Didn't find %s\n",
+    (&mpho)->name
     );
+    
 
-    /*
-    printf("\n\nJacob => %u\n", hash("Jacob"));
-    printf("Natalie => %u\n", hash("Natalie"));
-    printf("Sara => %u\n", hash("Sara"));
-    printf("Mpho => %u\n", hash("Mpho"));
-    printf("Tebogo => %u\n", hash("Tebogo"));
-    printf("Ron => %u\n", hash("Ron"));
-    printf("Jane => %u\n", hash("Jane"));
-    printf("Maren => %u\n", hash("Maren"));
-    printf("Bill => %u\n", hash("Bill"));
+
+    
+    printf("\n\nJacob => %u\n", hash(jacob.name));
+    printf("Kate => %u\n", hash(kate.name));
+    printf("Sara => %u\n", hash(sarah.name));
+    printf("Mpho => %u\n", hash(mpho.name));
+    printf("Edna => %u\n", hash(edna.name));
+    printf("Robert => %u\n", hash(robert.name));
+    printf("Jane => %u\n", hash(jane.name));
+    printf("Maren => %u\n", hash(maren.name));
+    printf("Eliza => %u\n", hash(eliza.name));
     */
 
 
