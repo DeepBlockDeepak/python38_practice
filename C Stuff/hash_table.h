@@ -69,18 +69,42 @@ void insert_person_hash_table(struct person_t *person ,struct person_t **table){
 
     int index = hash(person->name);
 
-    //if the element already exists in the table, i.e. it is not NULL
-    if(table[index]){
-        return;
+    for(int i = 0; i < TABLESIZE; i++){
+        //make sure to keep 'try_index' in bounds with modulo 
+        int try_index = (index + i) % TABLESIZE;
+        //if the index/hash is not already taken in the hash_table, insert the person here
+        //This will allow a repeated hash index to still insert... potentially
+        if(table[try_index] == NULL){
+            table[try_index] = person;
+            return;
+        }
     }
 
-    //if the element in the table is NULL, assign it a pointer to the person structure
-    //because of the modulo operator in the hash() function, 'index' is limited to approparite values for the table indeces
-    table[index] = person;
-    return;
 }
 
-//void delete_person_hash_table
+void delete_person_hash_table(struct person_t *person, struct person_t **table){
+   
+    if(!person){
+        printf("That is not a valid person_t struct\n");
+        return;
+    }
+    //compute the hash index
+    int index = hash(person->name);
+
+    //search the table for the index associated with the name and NULLify
+    for(int i = 0; i < TABLESIZE; i++){
+
+        int try_index = (index + i) % TABLESIZE;
+
+        if(table[try_index]->name == person->name){
+            table[try_index] = NULL;
+            return;
+        }
+    }
+    
+    printf("Person not found in the array\n");
+    return;
+}
 
 
 
@@ -89,13 +113,16 @@ struct person_t* find_person(char* name, struct person_t **table){
     
     int index = hash(name);
 
-    //I'm not sure that the first condition is required in the IF statement
-    if((table[index]) && strncmp(name, table[index]->name, MAX_NAME) == 0){
-        return table[index];
+    for (int i = 0; i < TABLESIZE; i++){
+        int try_index = (index + i) % TABLESIZE;
+        //I'm not sure that the first condition is required in the IF statement
+        if(table[try_index] && strncmp(name, table[try_index]->name, MAX_NAME) == 0){
+        //if(table[try_index]->name == name){
+            return table[try_index];
+        }
     }
-    else{
-        return NULL;
-    }
+    //printf("%s was not found in the table\n", name);
+    return NULL;
 
 }
 

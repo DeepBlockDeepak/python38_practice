@@ -21,10 +21,6 @@ int main(){
      */
     init_hash_table(hash_table);
 
-    printf("-----THE INITAL, NULL TABLE-----\n");
-    print_hash_table(hash_table);
-
-
     struct person_t jacob = {.name = "Jacob", .age = 256};
     struct person_t kate = {.name = "Kate", .age = 27};
     struct person_t mpho = {.name = "Mpho", .age = 14};
@@ -46,14 +42,22 @@ int main(){
     insert_person_hash_table(&robert, hash_table);
     insert_person_hash_table(&jane, hash_table);
 
+
+    printf("\n-----People Inserted in Hash Table-----\n");
     print_hash_table(hash_table);
     
 
-    /**
-     * @brief Initially had a weird non-bug issue, because "&mpho" was passsed as the first paramter of find_person()
-     *          and the code still compiled, even though it seems like it shouldn't have
-     * 
-     */
+    printf(
+    find_person((&mpho)->name, hash_table) ? "%s found in the array\n" : 
+    "Didn't find that person\n",
+    (find_person((&mpho)->name, hash_table))->name
+    );
+
+    delete_person_hash_table(&mpho, hash_table);
+    printf("----DELETED MPHO FROM TABLE---\n");
+    print_hash_table(hash_table);
+    
+    
     printf(
     find_person((&mpho)->name, hash_table) ? "%s found in the array\n" : 
     "Didn't find that person\n",
