@@ -26,6 +26,8 @@ int main(){
     struct person_t robert = {.name = "Robert", .age = 1};
     struct person_t jane = {.name = "Jane", .age = 75};
 
+    struct person_t bilbo = {.name = "Bilbo", .age = 122};
+
 
     insert_person_hash_table(&jacob, hash_table);
     insert_person_hash_table(&kate, hash_table);
@@ -46,6 +48,11 @@ int main(){
     delete_person_hash_table(&mpho, hash_table);
     printf("----DELETED MPHO FROM TABLE---\n");
     print_hash_table(hash_table);
+
+
+    if (!find_person(bilbo.name, hash_table)){
+        printf("could not find %s in the table\n", bilbo.name);
+    }
     
     /*
     printf(

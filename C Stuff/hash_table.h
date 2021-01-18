@@ -12,13 +12,14 @@
 #define MAX_NAME 256
 
 //When a Node is deleted, give it this sentinel value, rather than NULL, so that search times are reduced
-#define DELETED_NODE (uintptr_t)(0xFFFFFFFFFFFFFFUL)
+#define DELETED_NODE (struct person_t*)(0xFFFFFFFFFFFFFFFFUL)
 
 struct person_t{
     char name[MAX_NAME];
     int age;
     //add other stuff later
 };
+
 
 /**
  * @brief   Array of pointers to 'people' structs
@@ -84,7 +85,7 @@ void insert_person_hash_table(struct person_t *person ,struct person_t **table){
         int try_index = (index + i) % TABLESIZE;
         //if the index/hash is not already taken in the hash_table, insert the person here
         //This will allow a repeated hash index to still insert... potentially
-        if(table[try_index] == NULL || (uintptr_t)table[try_index] == DELETED_NODE){
+        if(table[try_index] == NULL || table[try_index] == DELETED_NODE){
             table[try_index] = person;
             return;
         }
@@ -111,7 +112,7 @@ void delete_person_hash_table(struct person_t *person, struct person_t **table){
         if (table[try_index] == NULL){
             return;
         }
-        if((uintptr_t)table[try_index] == DELETED_NODE){
+        if(table[try_index] == DELETED_NODE){
             continue;
         }
 
@@ -140,13 +141,13 @@ struct person_t* find_person(char* name, struct person_t **table){
         //if(table[try_index]->name == name){
             return table[try_index];
         }
-        if((uintptr_t)table[try_index] == DELETED_NODE){
+        if(table[try_index] == DELETED_NODE){
             continue;
         }
 
         //if the encountered Node is NULL, that means this node was never inserted into the table, so stop searching
         if(table[try_index] == NULL){
-            return NULL;//return false;
+            return false;//return NULL;
         }
     }
     //printf("%s was not found in the table\n", name);
