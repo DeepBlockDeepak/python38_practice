@@ -1,9 +1,18 @@
 #ifndef HASH_H
 #define HASH_H
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stdbool.h>
+#include <stdint.h>
+
 
 #define TABLESIZE 10
 #define MAX_NAME 256
+
+//When a Node is deleted, give it this sentinel value, rather than NULL, so that search times are reduced
+#define DELETED_NODE (uintptr_t)(0xFFFFFFFFFFFFFFUL)
 
 struct person_t{
     char name[MAX_NAME];
@@ -28,9 +37,10 @@ void print_hash_table(struct person_t **table){
     printf("\n\t{\n");
     for(int i = 0; i < TABLESIZE; i++){
 
-        if(!(*(table + i))){
+        if(!(*(table + i)) || table[i] == DELETED_NODE){
             printf("\t%d\t---\n", i);
-        }else{
+        }
+        else{
             printf("\t%d\t%s\t%d\n",i, (*(*(table + i))).name, table[i]->age);
         }
         
@@ -74,11 +84,12 @@ void insert_person_hash_table(struct person_t *person ,struct person_t **table){
         int try_index = (index + i) % TABLESIZE;
         //if the index/hash is not already taken in the hash_table, insert the person here
         //This will allow a repeated hash index to still insert... potentially
-        if(table[try_index] == NULL){
+        if(table[try_index] == NULL || (uintptr_t)table[try_index] == DELETED_NODE){
             table[try_index] = person;
             return;
         }
     }
+
     return;
 
 }
@@ -97,8 +108,15 @@ void delete_person_hash_table(struct person_t *person, struct person_t **table){
 
         int try_index = (index + i) % TABLESIZE;
 
+        if (table[try_index] == NULL){
+            return;
+        }
+        if((uintptr_t)table[try_index] == DELETED_NODE){
+            continue;
+        }
+
         if(table[try_index]->name == person->name){
-            table[try_index] = NULL;
+            table[try_index] = DELETED_NODE;    //DELETED_NODE is the sentinel value
             return;
         }
     }
@@ -116,12 +134,21 @@ struct person_t* find_person(char* name, struct person_t **table){
 
     for (int i = 0; i < TABLESIZE; i++){
         int try_index = (index + i) % TABLESIZE;
+        
+        //I'm not sure that the first condition is required in the IF statement
         if(table[try_index] && strncmp(name, table[try_index]->name, MAX_NAME) == 0){
         //if(table[try_index]->name == name){
             return table[try_index];
         }
+        if((uintptr_t)table[try_index] == DELETED_NODE){
+            continue;
+        }
+
+        //if the encountered Node is NULL, that means this node was never inserted into the table, so stop searching
+        if(table[try_index] == NULL){
+            return NULL;//return false;
+        }
     }
-    //I'm not sure that the first condition is required in the IF statement
     //printf("%s was not found in the table\n", name);
     return NULL;
 

@@ -1,8 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <stdbool.h>
-
 #include "hash_table.h"
 
 
@@ -48,12 +43,11 @@ int main(){
 
 
     //USING DELETE TO DELETE A PERSON STRUCT FROM THE ARRAY OF POINTERS AND CONFIRMING THE REMOVAL WITH FIND_PERSON()
-    /*
     delete_person_hash_table(&mpho, hash_table);
     printf("----DELETED MPHO FROM TABLE---\n");
     print_hash_table(hash_table);
     
-    
+    /*
     printf(
     find_person((&mpho)->name, hash_table) ? "%s found in the array\n" : 
     "Didn't find %s\n",
