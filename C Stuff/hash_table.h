@@ -10,6 +10,7 @@
 
 #define TABLESIZE 10
 #define MAX_NAME 256
+#define BUG "*******BUG********"
 
 //When a Node is deleted, give it this sentinel value, rather than NULL, so that search times are reduced
 #define DELETED_NODE (struct person_t*)(0xFFFFFFFFFFFFFFFFUL)
@@ -108,12 +109,12 @@ void delete_person_hash_table(struct person_t *person, struct person_t **table){
     for(int i = 0; i < TABLESIZE; i++){
 
         int try_index = (index + i) % TABLESIZE;
-
-        if (table[try_index] == NULL){
-            return;
-        }
+        
         if(table[try_index] == DELETED_NODE){
             continue;
+        }
+        if (table[try_index] == NULL){
+            return;
         }
 
         if(table[try_index]->name == person->name){
@@ -131,28 +132,33 @@ void delete_person_hash_table(struct person_t *person, struct person_t **table){
 //find a person in the table by their name
 struct person_t* find_person(char* name, struct person_t **table){
     
+    //Starting index in the hash table where the person could be located
     int index = hash(name);
 
+    //search every person_node starting with the index provided by the hash.... go forward until a NULL pointer is met
     for (int i = 0; i < TABLESIZE; i++){
+        //modulo keeps the value of the try_index within bounds of the hash table's possible indeces
         int try_index = (index + i) % TABLESIZE;
         
-        //I'm not sure that the first condition is required in the IF statement
-        if(table[try_index] && strncmp(name, table[try_index]->name, MAX_NAME) == 0){
-        //if(table[try_index]->name == name){
-            return table[try_index];
-        }
+        //Finding the deleted node address doesn't indicate anything. Continue the search
         if(table[try_index] == DELETED_NODE){
             continue;
         }
 
         //if the encountered Node is NULL, that means this node was never inserted into the table, so stop searching
         if(table[try_index] == NULL){
-            return false;//return NULL;
+            return NULL;//return NULL;
         }
+        
+        //I'm not sure that the first condition is required in the IF statement
+        if(table[try_index] && strncmp(table[try_index]->name, name, MAX_NAME) == 0){
+        //if(table[try_index]->name == name){
+            return table[try_index];
+        }
+
     }
     //printf("%s was not found in the table\n", name);
     return NULL;
-
 }
 
 

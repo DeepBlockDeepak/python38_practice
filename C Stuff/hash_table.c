@@ -27,7 +27,7 @@ int main(){
     struct person_t jane = {.name = "Jane", .age = 75};
 
     struct person_t bilbo = {.name = "Bilbo", .age = 122};
-
+    struct person_t dilbo = {.name = "Dilbo", .age = 992};
 
     insert_person_hash_table(&jacob, hash_table);
     insert_person_hash_table(&kate, hash_table);
@@ -38,6 +38,7 @@ int main(){
     insert_person_hash_table(&eliza, hash_table);
     insert_person_hash_table(&robert, hash_table);
     insert_person_hash_table(&jane, hash_table);
+    insert_person_hash_table(&bilbo, hash_table);
 
 
     printf("\n-----People Inserted in Hash Table-----\n");
@@ -45,25 +46,41 @@ int main(){
 
 
     //USING DELETE TO DELETE A PERSON STRUCT FROM THE ARRAY OF POINTERS AND CONFIRMING THE REMOVAL WITH FIND_PERSON()
+    //printf("%p == mpho's address\n", &mpho);
+    //printf("%p == hash_table's mpho address\n", &hash_table[5]);
     delete_person_hash_table(&mpho, hash_table);
+    //printf("%p == mpho's address after the delete_call() from the hash_table\n", &mpho);
+    //printf("%p == hash_table's mpho address after the delete()\n", &hash_table[5]);
     printf("----DELETED MPHO FROM TABLE---\n");
     print_hash_table(hash_table);
+    
+
+    insert_person_hash_table(&dilbo, hash_table);
+    printf("\nReinserted dilbo\n");
+    print_hash_table(hash_table);
+    
+
+    delete_person_hash_table(&dilbo, hash_table);
+    printf("\nDeleted Dilbo\n");
+    print_hash_table(hash_table);
+    
 
 
-    if (!find_person(bilbo.name, hash_table)){
-        printf("could not find %s in the table\n", bilbo.name);
+    if(!find_person(mpho.name, hash_table)){
+        printf("HE'S NOT HERE@@!!!\n");
     }
     
+
+    /**
+     * @note Why is it the case that modifying the value of an element of hash_table, leaves the original variable untouched?
+     *          
+     *       For example: When calling delete_person_hash_table(&mpho, hash_table), the table[try_index] = DELETED_NODE assignment, sets 
+     *                      pointer to a junk address, DELETED_NODE. However, mpho is still accessible
+     * 
+     */
+    printf("\n***TESTING***\naddress of table[8] == bilbo element = %p\naddress of bilbo the struct= %p\n", hash_table[5], &bilbo);
+
     /*
-    printf(
-    find_person((&mpho)->name, hash_table) ? "%s found in the array\n" : 
-    "Didn't find %s\n",
-    (&mpho)->name
-    );
-    
-
-
-    
     printf("\n\nJacob => %u\n", hash(jacob.name));
     printf("Kate => %u\n", hash(kate.name));
     printf("Sara => %u\n", hash(sarah.name));
