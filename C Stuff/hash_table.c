@@ -37,9 +37,9 @@ int main(){
     insert_person_hash_table(&maren, hash_table);
     insert_person_hash_table(&eliza, hash_table);
     insert_person_hash_table(&robert, hash_table);
-    insert_person_hash_table(&jane, hash_table);
+    insert_head_external_chaining_method(&jane, hash_table);
     insert_person_hash_table(&bilbo, hash_table);
-
+    insert_person_hash_table(&jane, hash_table);
 
     printf("\n-----People Inserted in Hash Table-----\n");
     print_hash_table(hash_table);
@@ -48,36 +48,13 @@ int main(){
     //USING DELETE TO DELETE A PERSON STRUCT FROM THE ARRAY OF POINTERS AND CONFIRMING THE REMOVAL WITH FIND_PERSON()
     //printf("%p == mpho's address\n", &mpho);
     //printf("%p == hash_table's mpho address\n", &hash_table[5]);
-    delete_person_hash_table(&mpho, hash_table);
+    //delete_person_hash_table(&mpho, hash_table);
     //printf("%p == mpho's address after the delete_call() from the hash_table\n", &mpho);
     //printf("%p == hash_table's mpho address after the delete()\n", &hash_table[5]);
-    printf("----DELETED MPHO FROM TABLE---\n");
-    print_hash_table(hash_table);
+
     
 
-    insert_person_hash_table(&dilbo, hash_table);
-    printf("\nReinserted dilbo\n");
-    print_hash_table(hash_table);
-    
-
-    //delete_person_hash_table(&dilbo, hash_table);
-    printf("\nDeleted Dilbo\n");
-    print_hash_table(hash_table);
-    
-
-    printf("\nDeleted jacob\n");
-    //delete_person_hash_table(&jacob, hash_table);
-    print_hash_table(hash_table);
-    
-
-    printf("Linked List External Chaining Method--->inserted mpho\n");
-    printf("Inserted Jane again\n");
-    insert_head_external_chaining_method(&jane, hash_table);
-    //print_hash_table(hash_table);
-    insert_head_external_chaining_method(&jacob, hash_table);
-    //print_hash_table(hash_table);
-    insert_head_external_chaining_method(&jane, hash_table);
-    print_hash_table(hash_table);
+  
     /**
      * @note Why is it the case that modifying the value of an element of hash_table, leaves the original variable untouched?
      *          

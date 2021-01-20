@@ -42,8 +42,9 @@ void init_hash_table(struct person_t **hash_table){
 
 void print_hash_table(struct person_t **table){
     printf("\n\t{\n");
-    for(int i = 0; i < TABLESIZE; i++){
 
+    for(int i = 0; i < TABLESIZE; i++){
+        //if the element is NULL
         if(!(*(table + i))){
             printf("\t%d\t---\n", i);
         }
@@ -56,11 +57,13 @@ void print_hash_table(struct person_t **table){
         else{
 
             struct person_t* person = table[i];
-
-            while(person && person != DELETED_NODE){
-                printf("\t%d\t%s\t%d\n",i, (*(*(table + i))).name, table[i]->age);//printf("\t%d\t%s\t%d\n",i, person->name, person->age);//
+            printf("\t%d\t", i);
+            while(person){
+                printf(!(person->next) ? "%s, %d\n" : "%s, %d -> ", person->name, person->age);
+                //printf("\t%d\t%s ,%d ->",i, person->name, person->age);//printf("\t%d\t%s\t%d\n",i, (*(*(table + i))).name, table[i]->age);//
                 person = person->next;
             }
+            //printf("\n");
 
         }
         
@@ -188,9 +191,14 @@ void insert_head_external_chaining_method(struct person_t* person, struct person
 
     int index = hash(person->name);
 
-    person->next = table[index];
+    //The idea was to use a tmp pointer that can be modified, so that 'person' isn't. But that's not the behavior right now.
+    struct person_t* tmp = person;
 
-    table[index] = person;
+    tmp->next = table[index];
+
+    table[index] = tmp;
+
+    printf("%p = &person\n%p = &tmp\n%p = &table[index]\n", &person, &tmp, &table[index]);
 
     return;
 
