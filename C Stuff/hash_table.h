@@ -10,7 +10,7 @@
 
 #define TABLESIZE 10
 #define MAX_NAME 256
-#define BUG "*******BUG********"
+#define BUG "\n*******BUG********\n"
 
 //When a Node is deleted, give it this sentinel value, rather than NULL, so that search times are reduced
 //Used for the Open Addressing- Linear Search method
@@ -63,15 +63,8 @@ void print_hash_table(struct person_t **table){
                 //printf("\t%d\t%s ,%d ->",i, person->name, person->age);//printf("\t%d\t%s\t%d\n",i, (*(*(table + i))).name, table[i]->age);//
                 person = person->next;
             }
-            //printf("\n");
 
         }
-        
-        /*//For simply pretty printing the entire array
-        printf(i == TABLESIZE - 1 ? "%s : %d}\n\n" :
-        "%s : %d,",
-        (**table).name, &(*table)->age);
-        */
     }
     
     printf("\t}\n");

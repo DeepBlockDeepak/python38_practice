@@ -1,6 +1,10 @@
 #include "hash_table.h"
 
 
+/**
+ * @brief       CREATE SOME PERSON STRUCTS.... INSERT THEM INTO AN ARRAY OF STRUCT POINTERS     
+ */
+
 int main(){
 
     struct person_t* hash_table[TABLESIZE];
@@ -37,32 +41,28 @@ int main(){
     insert_person_hash_table(&maren, hash_table);
     insert_person_hash_table(&eliza, hash_table);
     insert_person_hash_table(&robert, hash_table);
+    /**
+     * @bug     HOW DO YOU PASS A PERSON STRUCT POINTER TO THE INSERTION_CHAINING() FUNCTION WITHOUT MODIFYING THE ORIGINAL PERSON STRUCT????
+     * 
+     */
     insert_head_external_chaining_method(&jane, hash_table);
     insert_person_hash_table(&bilbo, hash_table);
-    insert_person_hash_table(&jane, hash_table);
+    //insert_head_external_chaining_method(&jane, hash_table);
 
     printf("\n-----People Inserted in Hash Table-----\n");
     print_hash_table(hash_table);
 
 
+/*
     //USING DELETE TO DELETE A PERSON STRUCT FROM THE ARRAY OF POINTERS AND CONFIRMING THE REMOVAL WITH FIND_PERSON()
-    //printf("%p == mpho's address\n", &mpho);
-    //printf("%p == hash_table's mpho address\n", &hash_table[5]);
-    //delete_person_hash_table(&mpho, hash_table);
-    //printf("%p == mpho's address after the delete_call() from the hash_table\n", &mpho);
-    //printf("%p == hash_table's mpho address after the delete()\n", &hash_table[5]);
+    printf("%p == mpho's address\n", &mpho);
+    printf("%p == hash_table's mpho address\n", &hash_table[5]);
+    delete_person_hash_table(&mpho, hash_table);
+    print_hash_table(hash_table);
+    printf("%p == mpho's address after the delete_call() from the hash_table\n", &mpho);
+    printf("%p == hash_table's mpho address after the delete()\n", &hash_table[5]);
 
-    
-
-  
-    /**
-     * @note Why is it the case that modifying the value of an element of hash_table, leaves the original variable untouched?
-     *          
-     *       For example: When calling delete_person_hash_table(&mpho, hash_table), the table[try_index] = DELETED_NODE assignment, sets 
-     *                      pointer to a junk address, DELETED_NODE. However, mpho is still accessible
-     * 
-     */
-    ///printf("\n***TESTING***\naddress of table[8] == bilbo element = %p\naddress of bilbo the struct= %p\n", hash_table[5], &bilbo);
+*/
 
     
     printf("\n\nJacob => %u\n", hash(jacob.name));
