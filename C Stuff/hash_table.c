@@ -16,18 +16,18 @@ int main(){
      */
     init_hash_table(hash_table);
 
-    struct person_t jacob = {.name = "Jacob", .age = 256};
-    struct person_t kate = {.name = "Kate", .age = 27};
-    struct person_t mpho = {.name = "Mpho", .age = 14};
-    struct person_t sarah = {.name = "Sarah", .age = 54};
-    struct person_t edna = {.name = "Edna", .age = 15};
-    struct person_t maren = {.name = "Maren", .age = 25};
-    struct person_t eliza = {.name = "Eliza", .age = 34};
-    struct person_t robert = {.name = "Robert", .age = 1};
-    struct person_t jane = {.name = "Jane", .age = 75};
+    struct person_t jacob = {.name = "Jacob", .age = 256, .next = NULL};
+    struct person_t kate = {.name = "Kate", .age = 27, .next = NULL};
+    struct person_t mpho = {.name = "Mpho", .age = 14, .next = NULL};
+    struct person_t sarah = {.name = "Sarah", .age = 54, .next = NULL};
+    struct person_t edna = {.name = "Edna", .age = 15, .next = NULL};
+    struct person_t maren = {.name = "Maren", .age = 25, .next = NULL};
+    struct person_t eliza = {.name = "Eliza", .age = 34, .next = NULL};
+    struct person_t robert = {.name = "Robert", .age = 1, .next = NULL};
+    struct person_t jane = {.name = "Jane", .age = 75, .next = NULL};
 
-    struct person_t bilbo = {.name = "Bilbo", .age = 122};
-    struct person_t dilbo = {.name = "Dilbo", .age = 992};
+    struct person_t bilbo = {.name = "Bilbo", .age = 122, .next = NULL};
+    struct person_t dilbo = {.name = "Dilbo", .age = 992, .next = NULL};
 
     insert_person_hash_table(&jacob, hash_table);
     insert_person_hash_table(&kate, hash_table);
@@ -60,17 +60,24 @@ int main(){
     print_hash_table(hash_table);
     
 
-    delete_person_hash_table(&dilbo, hash_table);
+    //delete_person_hash_table(&dilbo, hash_table);
     printf("\nDeleted Dilbo\n");
     print_hash_table(hash_table);
     
 
-
-    if(!find_person(mpho.name, hash_table)){
-        printf("HE'S NOT HERE@@!!!\n");
-    }
+    printf("\nDeleted jacob\n");
+    //delete_person_hash_table(&jacob, hash_table);
+    print_hash_table(hash_table);
     
 
+    printf("Linked List External Chaining Method--->inserted mpho\n");
+    printf("Inserted Jane again\n");
+    insert_head_external_chaining_method(&jane, hash_table);
+    //print_hash_table(hash_table);
+    insert_head_external_chaining_method(&jacob, hash_table);
+    //print_hash_table(hash_table);
+    insert_head_external_chaining_method(&jane, hash_table);
+    print_hash_table(hash_table);
     /**
      * @note Why is it the case that modifying the value of an element of hash_table, leaves the original variable untouched?
      *          
@@ -78,9 +85,9 @@ int main(){
      *                      pointer to a junk address, DELETED_NODE. However, mpho is still accessible
      * 
      */
-    printf("\n***TESTING***\naddress of table[8] == bilbo element = %p\naddress of bilbo the struct= %p\n", hash_table[5], &bilbo);
+    ///printf("\n***TESTING***\naddress of table[8] == bilbo element = %p\naddress of bilbo the struct= %p\n", hash_table[5], &bilbo);
 
-    /*
+    
     printf("\n\nJacob => %u\n", hash(jacob.name));
     printf("Kate => %u\n", hash(kate.name));
     printf("Sara => %u\n", hash(sarah.name));
@@ -90,7 +97,7 @@ int main(){
     printf("Jane => %u\n", hash(jane.name));
     printf("Maren => %u\n", hash(maren.name));
     printf("Eliza => %u\n", hash(eliza.name));
-    */
+    /**/
 
 
     return 0;

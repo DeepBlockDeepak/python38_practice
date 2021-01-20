@@ -13,12 +13,17 @@
 #define BUG "*******BUG********"
 
 //When a Node is deleted, give it this sentinel value, rather than NULL, so that search times are reduced
+//Used for the Open Addressing- Linear Search method
 #define DELETED_NODE (struct person_t*)(0xFFFFFFFFFFFFFFFFUL)
 
 struct person_t{
     char name[MAX_NAME];
     int age;
-    //add other stuff later
+    
+    //added this next pointer once all the initial functions were created
+    //using a linked list to perform external chaining method
+    struct person_t *next;
+
 };
 
 
@@ -39,11 +44,24 @@ void print_hash_table(struct person_t **table){
     printf("\n\t{\n");
     for(int i = 0; i < TABLESIZE; i++){
 
-        if(!(*(table + i)) || table[i] == DELETED_NODE){
+        if(!(*(table + i))){
             printf("\t%d\t---\n", i);
         }
+
+        else if(table[i] == DELETED_NODE){
+            printf("\t%d\t----<deleted>\n", i);
+        }
+
+
         else{
-            printf("\t%d\t%s\t%d\n",i, (*(*(table + i))).name, table[i]->age);
+
+            struct person_t* person = table[i];
+
+            while(person && person != DELETED_NODE){
+                printf("\t%d\t%s\t%d\n",i, (*(*(table + i))).name, table[i]->age);//printf("\t%d\t%s\t%d\n",i, person->name, person->age);//
+                person = person->next;
+            }
+
         }
         
         /*//For simply pretty printing the entire array
@@ -159,6 +177,24 @@ struct person_t* find_person(char* name, struct person_t **table){
     }
     //printf("%s was not found in the table\n", name);
     return NULL;
+}
+
+void insert_head_external_chaining_method(struct person_t* person, struct person_t **table){
+
+    //if a NULL node is fed to the first argument
+    if(!person){
+        return;//return false;
+    }
+
+    int index = hash(person->name);
+
+    person->next = table[index];
+
+    table[index] = person;
+
+    return;
+
+
 }
 
 
