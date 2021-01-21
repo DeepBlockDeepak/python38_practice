@@ -40,6 +40,11 @@ void init_hash_table(struct person_t **hash_table){
     }
 }
 
+
+/**
+ * @brief Prints the table. If it encounters a linked list, prints this list accordingly
+ * 
+ */
 void print_hash_table(struct person_t **table){
     printf("\n\t{\n");
 
@@ -86,7 +91,7 @@ unsigned int hash(char *name){
 }
 
 
-//It is possible to use 'bool' for the function return type, while returning falses or trues, but it's not needed
+//Inserts using the Open Addressing method---specifically linear probing
 void insert_person_hash_table(struct person_t *person ,struct person_t **table){
 
     if(!(person)){
@@ -110,6 +115,10 @@ void insert_person_hash_table(struct person_t *person ,struct person_t **table){
 
 }
 
+
+/**
+ * @brief Goal is to find a head pointer at table[index] and assign the DELETED_NODE address here. Not sure how this works for linked list members yet
+ */
 void delete_person_hash_table(struct person_t *person, struct person_t **table){
    
     if(!person){
@@ -175,6 +184,10 @@ struct person_t* find_person(char* name, struct person_t **table){
     return NULL;
 }
 
+
+/**
+ * @brief   To insert with the External Chaining method... Simply make the 'person' argument the head of linked list.
+ */
 void insert_head_external_chaining_method(struct person_t* person, struct person_t **table){
 
     //if a NULL node is fed to the first argument
@@ -184,15 +197,27 @@ void insert_head_external_chaining_method(struct person_t* person, struct person
 
     int index = hash(person->name);
 
-    //The idea was to use a tmp pointer that can be modified, so that 'person' isn't. But that's not the behavior right now.
-    struct person_t* tmp = person;
+    //create a temporary node to copy the contents of the 'person' argument, so as to not modify 'person'
+    struct person_t* tmp = NULL;
 
+    //dedicate space and check if the memory was allocated
+    tmp = malloc(sizeof(struct person_t));
+    
+    if(!tmp){
+        printf("Error: malloc failed\n");
+        exit(1);
+    }
+    
+    //copy 'person' to tmp
+    tmp = person;
+    //since we're inserting a head pointer, point tmp's next to the table[index]
     tmp->next = table[index];
 
+    //table[index] now is assigned to the head of the linked list, tmp
     table[index] = tmp;
 
-    printf("%p = &person\n%p = &tmp\n%p = &table[index]\n", &person, &tmp, &table[index]);
-
+    //printf("%p = &person\n%p = &tmp\n%p = &table[index]\n", &person, &tmp, &table[index]);
+    //printf("%d = tmp->age\t%s = tmp->name\n", tmp->age, tmp->name);
     return;
 
 
