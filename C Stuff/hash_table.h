@@ -140,8 +140,28 @@ void delete_person_hash_table(struct person_t *person, struct person_t **table){
             return;
         }
 
+
+    /**
+     * @brief probably need to make 2 different IFS
+     * 
+     *          One for when the encountered element is a linked list... (Test IF(table[index]->next) to determine that .next!=NULL)
+     *          Another for when IF(!table[index]->next) so a simple deletion can take place without list traversing
+     * 
+     */
         if(table[try_index]->name == person->name){
+            //printf("%s\n%s\n", BUG, table[try_index]->name);
+            //Probably need to add a list traversal deletion loop. Might need free() but I don't know how that works for run-time nodes
+
+            struct person_t* leader = table[index]->next;
+            while(leader){
+                free(table[index]);
+                table[index] = leader;
+                leader = leader->next;
+            }
+            //free(table[index]);
+
             table[try_index] = DELETED_NODE;    //DELETED_NODE is the sentinel value
+            //table[try_index]->next = NULL;
             return;
         }
     }
@@ -186,7 +206,7 @@ struct person_t* find_person(char* name, struct person_t **table){
 
 
 /**
- * @brief   To insert with the External Chaining method... Simply make the 'person' argument the head of linked list.
+ * @brief   To insert a head node with the External Chaining method... Simply make the 'person' argument the head of linked list.
  */
 void insert_head_external_chaining_method(struct person_t* person, struct person_t **table){
 
@@ -198,23 +218,28 @@ void insert_head_external_chaining_method(struct person_t* person, struct person
     int index = hash(person->name);
 
     //create a temporary node to copy the contents of the 'person' argument, so as to not modify 'person'
-    struct person_t* tmp = NULL;
+    struct person_t* head = NULL;
 
     //dedicate space and check if the memory was allocated
-    tmp = malloc(sizeof(struct person_t));
+    head = malloc(sizeof(struct person_t));
     
-    if(!tmp){
+    if(!head){
         printf("Error: malloc failed\n");
         exit(1);
     }
     
-    //copy 'person' to tmp
-    tmp = person;
-    //since we're inserting a head pointer, point tmp's next to the table[index]
-    tmp->next = table[index];
+    //copy 'person' to head
+    *head = *person;
+    
+    if(table[index] == DELETED_NODE){
+        table[index] = head;
+        return;
+    }
+    //since we're inserting a head pointer, point head's next to the table[index]
+    head->next = table[index];
 
-    //table[index] now is assigned to the head of the linked list, tmp
-    table[index] = tmp;
+    //table[index] now is assigned to the head of the linked list, head
+    table[index] = head;
 
     //printf("%p = &person\n%p = &tmp\n%p = &table[index]\n", &person, &tmp, &table[index]);
     //printf("%d = tmp->age\t%s = tmp->name\n", tmp->age, tmp->name);
@@ -222,6 +247,42 @@ void insert_head_external_chaining_method(struct person_t* person, struct person
 
 
 }
+
+void insert_tail_external_chaining(struct person_t* person, struct person_t **table){
+    
+    
+    int index = hash(person->name);
+
+    struct person_t *tmp, *tail = NULL;
+
+    tail = malloc(sizeof(struct person_t));
+
+    if(!tail){
+        printf("Allocation for the tail node failed\n");
+        exit(1);
+    }
+    
+    *tail = *person;    //for insertion 
+    
+    tmp = table[index];  //for traversal
+    
+
+    if(table[index] == DELETED_NODE){
+        //printf("\n*******%s tried to insert at the deleted node*******\n",person->name);
+        table[index] = tail;
+        return;
+    }
+
+    while(tmp->next){
+        tmp = tmp->next;
+    }
+
+    tmp->next = tail;  
+    //tail->next = NULL;  
+    
+    return;
+}
+
 
 
 

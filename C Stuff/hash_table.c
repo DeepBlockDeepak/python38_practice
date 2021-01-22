@@ -54,19 +54,24 @@ int main(){
     printf("\n-----People Inserted in Hash Table-----\n");
     print_hash_table(hash_table);
 
-    //demonstrating the deletion of a node
-    delete_person_hash_table(&mpho, hash_table);
-    printf("\n-----Mpho was deleted-----\n");
     printf(
         find_person(mpho.name, hash_table) ? "%s is in the table\n": "%s is not here\n", mpho.name
     );
-    print_hash_table(hash_table);
 
 
     printf("\nTrying to demonstrate the readdition of Jane with the External Chaining Idea\n");
-    //ERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERROR
-    //JANE IS BEING MODIFIED WHEN I DON'T WANT IT TO BE
     insert_head_external_chaining_method(&jane, hash_table);
+    insert_head_external_chaining_method(&jane, hash_table);
+    insert_head_external_chaining_method(&jane, hash_table);
+    insert_tail_external_chaining(&jane, hash_table);
+    print_hash_table(hash_table);
+    
+    printf("\nDeleting the Robert Jane... Hopefully it deletes the linked list.\n");
+    delete_person_hash_table(&robert, hash_table);
+    insert_head_external_chaining_method(&robert, hash_table);
+    delete_person_hash_table(&edna, hash_table);
+    insert_head_external_chaining_method(&edna, hash_table);
+    //delete_person_hash_table(&jane, hash_table);
     print_hash_table(hash_table);
 
 
