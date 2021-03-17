@@ -1,3 +1,4 @@
+#!python3
 #fib() creates a fib_series list using the two iterators, a and b, to cycle in a loop until the correct values are reached.
 #fib2() uses a series method, in a more formal way of writing it in math-language
 
@@ -30,10 +31,10 @@ def fib2(n): #will return a list of fibonacci sequence with n # of elements
         blank.append(blank[i-1] + blank[i -2])
     return blank
 
-test = 30
+test = 12
 
-print ("Fibonacci with cycle method is: ", fib(test))
-print ("SUM SUM SUM = " , sum(fib(test)), end = "\n" *2)
+print ("\nFibonacci with cycle method is: ", fib(test))
+print ("SUM = " , sum(fib(test)), end = "\n" *2)
 
 print("Fibonacci with list appending method is: ",fib2(test))
 

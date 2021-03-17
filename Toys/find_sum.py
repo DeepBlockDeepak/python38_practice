@@ -1,5 +1,5 @@
 #find the 'sum' parameter among the elements in the list "array"
-'''
+
 def find_sum(array, sum):
 
     array.sort()
@@ -35,9 +35,9 @@ array = [
     3,
     3
 ]
-sum = 6
+sum = 106
 
 find_sum(array, sum)
-'''
-from C:\\python38\\scripts\\python38_practice\\toys\\derp.py import derp
-derp()
+
+#from C:\\python38\\scripts\\python38_practice\\toys\\derp.py import derp
+#derp()

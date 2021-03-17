@@ -21,7 +21,7 @@ def direc_size(dir_name):
         return total
 
 
-path = 'C:\\Users\\rick_\\VirtualBox VMs\\Ubuntu\\Ubuntu 20.04.01.vdi'
+path = 'C:\\Users\\rick_\\VirtualBox VMs\\Ubuntu'
 print ("Recursive Method------------->", direc_size(path))
 
 #testing against the following naive approach

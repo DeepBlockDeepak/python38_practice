@@ -11,7 +11,7 @@ import logging, os
 #                                                                                   #
 #####################################################################################
 
-loggin.debug()    #smallest rank...Everything == debug and 'above' debug will be printed if .DEBUG is used in Config
+logging.debug()    #smallest rank...Everything == debug and 'above' debug will be printed if .DEBUG is used in Config
 logging.info("") 
 logging.warning("")
 logging.error("")
@@ -28,6 +28,9 @@ while True:        #os.path.abspath('.') is the directory which contains the cur
     if not os.path.exists(error_log_filepath): #if the filepath is novel, then it's good to go
         break
     error_file_num += 1 #if the filepath isn't novel, iterate it's basename number
+
+
+
 
 #the parameter 'filename = error_log_filepath' saves the logging content to novel files 
 logging.basicConfig(filename = error_log_filepath, level = logging.DEBUG, format = "%(asctime)s - %(levelname)s - %(message)s")

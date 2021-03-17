@@ -40,7 +40,6 @@ def string_reverser2(input_string):
 
     final = ''          #final string to contain the correctly ordered result of delimeters and words
 
-
     """
     Words_list and Delimter_list will often not be the same length. 
     It is necessary to loop over the range of the longest length, ignoring when an out-of-bounds loop is 
@@ -49,14 +48,17 @@ def string_reverser2(input_string):
     for i in range(max(len(w_list), len(d_list))):
         
         word_string = w_list[i] if i < len(w_list) else ''
+
         delim_string = d_list[i] if i < len(d_list) else ''
-        final += delim_string + word_string
+
+        final += delim_string + word_string        
+
     
     return final
 
 test1 = 'hello/world:here'  #here/world:hello
-test2 = 'hello/world:here/' #here/world:hello/
-test3 = ':hello//world:here;;' #:here//world:hello;;
+test2 = 'hello/world:here//;;' #here/world:hello/
+test3 = ':hello//world:here;' #:here//world:hello;;
 
 for test in [test1, test2, test3]:
     print("\t/ " + "-"*len(test) + " \\")

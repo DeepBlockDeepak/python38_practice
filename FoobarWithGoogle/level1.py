@@ -1,6 +1,6 @@
 #solution() should search within range(0,s) for which s is in range(1,1000001) for largest value
 # n for which n^2 < s. Then, appending to a list, find the remaining squares until the sum of the squares matches 'area'
-def solution(area):
+def square_factor_seeker(area):
     possible_sqrts = []
     panel = []
     '''
@@ -17,8 +17,9 @@ def solution(area):
     
     counter = len(possible_sqrts)-1 
     while counter >=0:
+        #possible if statement to immediately break if (area - possible_sqrts[counter] < 0)
         if area - possible_sqrts[counter]>= 0: #if the total panel area still has room after subtracting away the largest sqrt panel
-            panel.append(possible_sqrts[counter]) #add this sqrt panel size to the solution list
+            panel.append(int(possible_sqrts[counter]**0.5)) #add this sqrt panel size to the solution list
             area -= possible_sqrts[counter] #decrement area by the added panel size
         counter -= 1 #next
     '''
@@ -31,5 +32,11 @@ def solution(area):
 
     return panel
 
-test_val = 100006
-print (test_val, "****", solution(test_val), "****", sum(solution(test_val)))
+#print (test_val, " = ", square_factor_seeker(test_val), "****", sum(square_factor_seeker(test_val)))
+test_val1 = 100369766
+test_val2 = 72
+test_val3 = 27
+for test_input in [test_val1, test_val2, test_val3]:
+  print(str(test_input) + " = " + '^2 + '.join(map(str, square_factor_seeker(test_input))) + "^2")
+
+#print("{} + ".format(i)) for i in square_factor_seeker(test_val) if i < len(square_factor_seeker(test_val)) - 1 else print(i)
