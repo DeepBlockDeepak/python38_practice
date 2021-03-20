@@ -3,7 +3,7 @@
 
 import zipfile,os
 
-def backupToZip(folder, backup_location = 'C:\\Python38\\Scripts\\python38_practice\\Chapter9\\backupToZip_storage'):
+def backupToZip(folder, backup_location = 'C:\python_backup'):
 	# Backup the entire contents of "folder" into a ZIP file.
 
 	folder = os.path.abspath(folder)
@@ -35,5 +35,5 @@ def backupToZip(folder, backup_location = 'C:\\Python38\\Scripts\\python38_pract
 			zip_folder.write(os.path.join(folderName,filename))#Joining folderName to filename!!!!!!!!! Allows correct file paths
 	zip_folder.close()
 
-backupToZip(r'C:\Python38\Scripts\python38_practice\Chapter9\spamZip')
+backupToZip(r'C:\Python38\Scripts\python38_practice')
 
