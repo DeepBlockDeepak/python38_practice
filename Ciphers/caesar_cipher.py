@@ -30,7 +30,13 @@ def user_menu():
 
 def caesar_encrypt():
 
+    #comment out the following and uncomment the 'with open()' to grab plain text from a file in OS
     user_plaintext = pyperclip.paste()
+    """
+    with open(r'C:\Python38\Scripts\python38_practice\Ciphers\some_test.txt', 'r') as text:
+        user_plaintext = text.read()
+    """
+    #user_plaintext = 
     cipher_text = ""
 
     cipher_key = int(input("What is the cipher key value? "))

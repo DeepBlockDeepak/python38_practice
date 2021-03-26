@@ -45,7 +45,7 @@ void init_hash_table(struct person_t **hash_table){
  * @brief Prints the table. If it encounters a linked list, prints this list accordingly
  * 
  */
-void print_hash_table(struct person_t **table){
+void print_hash_table(struct person_t* *table){
     printf("\n\t{\n");
 
     for(int i = 0; i < TABLESIZE; i++){
@@ -92,7 +92,7 @@ unsigned int hash(char *name){
 
 
 //Inserts using the Open Addressing method---specifically linear probing
-void insert_person_hash_table(struct person_t *person ,struct person_t **table){
+void insert_person_hash_table(struct person_t *person ,struct person_t* *table){
 
     if(!(person)){
         return;
@@ -116,10 +116,43 @@ void insert_person_hash_table(struct person_t *person ,struct person_t **table){
 }
 
 
+
+void insert_dynamically(struct person_t* *hash_table){
+
+    //initially declared 'tmp' to help with the "eating of the space char" in person_name
+    //decided to just sscanf person_name back into itself.
+    //char *tmp = (char *) calloc(MAX_NAME, sizeof(char));
+
+    int person_age;
+    //create space for the user name
+    char *person_name = (char *) calloc(MAX_NAME, sizeof(char));
+
+    printf("Type the person's name, please: ");
+    fgets(person_name, MAX_NAME, stdin);
+    sscanf(person_name, "%s", person_name);
+
+    printf("Enter the person's age\n");
+    scanf("%d", &person_age);
+    //fgets(person_age, 16, stdin);
+
+    struct person_t* new_person = (struct person_t*) malloc(sizeof(struct person_t));
+
+    //(*new_person).name = person_name;
+    strcpy((*new_person).name, person_name);
+    (*new_person).age = person_age;
+    new_person->next = NULL;
+
+
+    insert_person_hash_table(new_person, hash_table);
+
+}
+
+
+
 /**
  * @brief Goal is to find a head pointer at table[index] and assign the DELETED_NODE address here. Not sure how this works for linked list members yet
  */
-void delete_person_hash_table(struct person_t *person, struct person_t **table){
+void delete_person_hash_table(struct person_t *person, struct person_t* *table){
    
     if(!person){
         printf("That is not a valid person_t struct\n");
@@ -173,7 +206,7 @@ void delete_person_hash_table(struct person_t *person, struct person_t **table){
 
 
 //find a person in the table by their name
-struct person_t* find_person(char* name, struct person_t **table){
+struct person_t* find_person(char* name, struct person_t* *table){
     
     //Starting index in the hash table where the person could be located
     int index = hash(name);
@@ -208,7 +241,7 @@ struct person_t* find_person(char* name, struct person_t **table){
 /**
  * @brief   To insert a head node with the External Chaining method... Simply make the 'person' argument the head of linked list.
  */
-void insert_head_external_chaining_method(struct person_t* person, struct person_t **table){
+void insert_head_external_chaining_method(struct person_t* person, struct person_t* *table){
 
     //if a NULL node is fed to the first argument
     if(!person){
@@ -248,7 +281,7 @@ void insert_head_external_chaining_method(struct person_t* person, struct person
 
 }
 
-void insert_tail_external_chaining(struct person_t* person, struct person_t **table){
+void insert_tail_external_chaining(struct person_t* person, struct person_t* *table){
     
     
     int index = hash(person->name);
