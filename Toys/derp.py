@@ -1,3 +1,4 @@
+#!python3
 #derp.py will take in user text as input, and return derp format. IN-> "shut up" Out-> "ShUT uP"
 import pyperclip #allows script to store output into clipboard
 from random import * # random module used for capitalization of string characters
