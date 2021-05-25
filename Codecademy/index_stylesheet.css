@@ -1,0 +1,192 @@
+.blue{
+    color: blue
+}
+
+.pink{
+    color:pink
+}
+
+.brown{
+    color:brown
+}
+
+
+/*Universal Selector: for selecting all elements of any type
+* {
+    border: 1px solid red;
+}
+*/
+
+p {
+    color: green;
+}
+
+h1 {
+    color: maroon;
+}
+
+.title {
+    color: teal;
+}
+
+.uppercase {
+    text-transform: uppercase;
+}
+
+#article-title {
+    font-family: cursive;
+}
+
+a[href*='florence'] {
+    color: lightgreen;
+}
+
+a[href*='beijing'] {
+    color: lightblue;
+}
+
+a[href*='seoul'] {
+
+    color: lightpink;
+}
+
+
+body {
+    /* Old browsers */
+    background: #141E30;
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(-45deg, #35577D, #141E30);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(-45deg, #35577D, #141E30);
+    margin: 0;
+    padding: 0;
+  }
+
+h1 {
+    color: #FFF;
+    font-size: 2em;
+    padding-top: 100px;
+    width: 100%;
+    font-family: Georgia;
+}
+
+h2 {
+    border-bottom: 1px solid rgba(255, 184, 245, 0.493);
+    color: rgba(255, 255, 255, 0.5);
+    font-weight: bolder;
+    font-size: 22px;
+    line-height: 24px;
+    padding-bottom: 30px;
+    text-align: left;
+    width: 70%;
+    font-family: Georgia;
+}
+
+h3 {
+    border-bottom: 1px solid rgba(231, 199, 139, 0.87);
+    color: rgba(175, 255, 151, 0.5);
+    font-weight: 100;
+    font-size: 22px;
+    line-height: 24px;
+    padding-bottom: 30px;
+    text-align: left;
+    width: 70%;
+    font-family: Georgia;
+}
+
+
+li{
+    color: whitesmoke;
+    font-weight: bold;
+}
+
+.stand_out_neon{
+    color: greenyellow;
+}
+
+a:hover{
+    color: rgb(252, 36, 234);
+}
+
+
+
+p {
+    color: aliceblue;
+    line-height: 1.3em;
+    text-align: left;
+    width: 100%;
+    font-family: Helvetica;
+}
+
+.byline {
+    font-family: Helvetica;
+    color: rgba(255, 255, 255, 0.5);
+    float: left;
+    font-size: 14px;
+    padding-left: 10px;
+    text-transform: uppercase;
+}
+
+.caption {
+    display: block;
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-style: italic;
+    line-height: 14px;
+    margin-left: 300px;
+    padding: 10px;
+    position: relative;
+    top: 80%;
+    width: 60%;
+}
+
+.content {
+    padding: 40px;
+}
+
+.image {
+    background-image: url("https://www.nps.gov/common/uploads/banner_image/nri/secondary/3F140CFA-1DD8-B71B-0B23D78C2E452AA9.jpg");
+    background-size: cover;
+    background-position: center;
+    height: 300px;
+}
+
+#sub_image{
+
+    -webkit-box-shadow: 5px 0px 5px 0px rgba(0, 0, 50, 0.97);
+    -moz-box-shadow: 5px 0px 5px 0px rgba(0, 0, 50, 0.97);
+    background-image: url("https://upload.wikimedia.org/wikipedia/en/8/87/Timothy_Treadwell.jpg");
+    box-shadow: 5px 0px 5px 0px rgba(0, 0, 50, 0.97);
+    float: left;
+    height:315px;
+    width: 240.0px;
+    position:absolute;
+    opacity: 0.8;
+
+}
+#sub_image:before {
+    position: relative;
+    content: '';
+    background: rgba(0,0,0, 0.5); /*partially transparent image*/
+    width: 124.5px;
+    height: 160px;
+    pointer-events: none;
+    /*opacity: 0.5;*/
+}
+
+.writer-img {
+    -webkit-box-shadow: 5px 0px 5px 0px rgba(0, 0, 50, 0.97);
+    -moz-box-shadow: 5px 0px 5px 0px rgba(0, 0, 50, 0.97);
+    box-shadow: 5px 0px 5px 0px rgba(0, 0, 50, 0.97);
+    float: left;
+    width: 50px;
+}
+  
+  
+  
+  
+  
+  
+  
+  
+  

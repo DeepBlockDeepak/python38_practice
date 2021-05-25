@@ -36,6 +36,8 @@ while not url.endswith("#"):
 
     #Find url of the comic image
     comicElem = soup.select('#comic img')
+
+    
     if comicElem == []:
         print("Could not find comic image.")
 
@@ -61,13 +63,13 @@ while not url.endswith("#"):
                 imageFile.write(chunk)
 
         
-        #move to the "Prev" button's URL
-        prevLink = soup.select('a[rel="prev"]')[0]
+    #move to the "Prev" button's URL
+    prevLink = soup.select('a[rel="prev"]')[0]
 
-        url = "http://xkcd.com" + prevLink.get('href')
+    url = "http://xkcd.com" + prevLink.get('href')
     
     
-    print("Done")
+print("Done")
 
 
 
