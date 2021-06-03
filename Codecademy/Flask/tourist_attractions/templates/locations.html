@@ -1,150 +1,83 @@
-<!-- extend from "base.html" here -->
+{% extends "base.html" %}
 
-<!-- begin block content here -->
+{% block content %}
 
-<h1></h1> <!-- insert category here -->
+  <h1>{{ template_categories[template_category] }}</h1> <!-- insert category here -->
 
-<div class="navbar">
-  <!-- begin for loop here -->
-
-    <a href=""></a> <!-- set attribute and text here -->
-  <!-- end for loop here -->
-
-</div>
-
-<table>
-  <colgroup>
-    <col style="width: 20%">
-    <col style="width: 70%">
-    <col style="width: 10%">
-  </colgroup>
-  <tbody class="loctable">
-      <!-- begin for loop here -->
-
-      <tr>
-        <td class="loc"></td> <!-- insert location name here -->
-        <td class="desc"></td> <!-- insert location description here -->
-        <td class="btns">
-          <!-- start if statement here -->
-
-          <form method="POST">
-            <input type="submit" class="up" name="" value=&#8599;> <!-- set name attribute here -->
-            <input type="submit" class="del" name="" value="X"> <!-- set name attribute here -->
-          </form>
-          <!-- end if statement here -->
-
-        </td>
-      </tr>
-      <!-- end for loop here -->
-
-  </tbody>
-</table>
-
-<form class="addform" action="" method="POST"> <!-- set action attribute here -->
-  <!-- call hidden_tag() here -->
+  <div class="navbar">
+    <!-- loop over each key,val pair in the categories dictionary, printing/routing the webpages for the 'category' values -->
+    <!-- identical to 'cat_key, cat_label in template_categories.items()' -->
+    {% for cat_key, cat_label in template_categories|dictsort %}
+      <!-- embed the 'locations()' route into the template_category value -->
+      <!-- identical to url_for('locations', category = cat_key) -->
+      <a href="{{ cat_key }}">{{ cat_label }}</a> 
+    {% endfor %}
+  </div>
 
   <table>
     <colgroup>
-      <col style="width: 40%">
-      <col style="width: 40%">
       <col style="width: 20%">
+      <col style="width: 70%">
+      <col style="width: 10%">
     </colgroup>
-    <tbody>
-      <tr>
-        <td></td> <!-- insert location name label here --><!-- extend from "base.html" here -->
 
-        <!-- begin block content here -->
-        
-          <h1></h1> <!-- insert category here -->
-        
-          <div class="navbar">
-            <!-- begin for loop here -->
-        
-              <a href=""></a> <!-- set attribute and text here -->
-            <!-- end for loop here -->
-        
-          </div>
-        
-          <table>
-            <colgroup>
-              <col style="width: 20%">
-              <col style="width: 70%">
-              <col style="width: 10%">
-            </colgroup>
-            <tbody class="loctable">
-                <!-- begin for loop here -->
-        
-                <tr>
-                  <td class="loc"></td> <!-- insert location name here -->
-                  <td class="desc"></td> <!-- insert location description here -->
-                  <td class="btns">
-                    <!-- start if statement here -->
-        
-                    <form method="POST">
-                      <input type="submit" class="up" name="" value=&#8599;> <!-- set name attribute here -->
-                      <input type="submit" class="del" name="" value="X"> <!-- set name attribute here -->
-                    </form>
-                    <!-- end if statement here -->
-        
-                  </td>
-                </tr>
-                <!-- end for loop here -->
-        
-            </tbody>
-          </table>
-        
-          <form class="addform" action="" method="POST"> <!-- set action attribute here -->
-            <!-- call hidden_tag() here -->
-        
-            <table>
-              <colgroup>
-                <col style="width: 40%">
-                <col style="width: 40%">
-                <col style="width: 20%">
-              </colgroup>
-              <tbody>
-                <tr>
-                  <td></td> <!-- insert location name label here -->
-                  <td></td> <!-- insert location description label here -->
-                  <td></td> <!-- insert location category label here -->
-                </tr>
-                <tr>
-                  <td></td> <!-- insert add_location name here -->
-                  <td></td> <!-- insert add_location description here -->
-                  <td>
-                    <!-- begin for loop here -->
-        
-                      <div></div> <!-- insert button here -->
-                    <!-- end for loop here -->
-        
-                  </td>
-                </tr>
-                <tr>
-                  <td></td> <!-- insert submit here -->
-                </tr>
-              </tbody>
-            </table>
-          </form>
-        <!-- end block content here -->
-        
-        <td></td> <!-- insert location description label here -->
-        <td></td> <!-- insert location category label here -->
-      </tr>
-      <tr>
-        <td></td> <!-- insert add_location name here -->
-        <td></td> <!-- insert add_location description here -->
-        <td>
-          <!-- begin for loop here -->
+    <tbody class="loctable">
 
-            <div></div> <!-- insert button here -->
-          <!-- end for loop here -->
+        <!-- each 'location' is a Location() object which has the same <category> attribute passed to the '/category' route   -->
+        {% for location in template_locations %}
+        <tr>
+          <td class="loc">{{ location.name }}</td> 
+          <td class="desc">{{ location.description}}</td>
+          <td class="btns">
+            <!-- the 'visited' category does not require any buttons, so check for that here -->
+            {% if location.category in ["recommended", "tovisit"] %}
 
-        </td>
-      </tr>
-      <tr>
-        <td></td> <!-- insert submit here -->
-      </tr>
+            <form method="POST">
+              <input type="submit" class="up" name="{{ location.name }}" value=&#8599;>
+              <input type="submit" class="del" name="{{ location.name }}" value="X">
+            </form>
+            
+            {% endif %}
+
+          </td>
+        </tr>
+        
+        {% endfor %}
+
     </tbody>
   </table>
-</form>
-<!-- end block content here -->
+
+  <form class="addform" action="" method="POST"> <!-- set action attribute here -->
+    <!-- call hidden_tag() here -->
+
+    <table>
+      <colgroup>
+        <col style="width: 40%">
+        <col style="width: 40%">
+        <col style="width: 20%">
+      </colgroup>
+      <tbody>
+        <tr>
+          <td>{{ template_locations.label }}</td> <!-- insert location name label here -->
+          <td></td> <!-- insert location description label here -->
+          <td></td> <!-- insert location category label here -->
+        </tr>
+        <tr>
+          <td></td> <!-- insert add_location name here -->
+          <td></td> <!-- insert add_location description here -->
+          <td>
+            <!-- begin for loop here -->
+
+              <div></div> <!-- insert button here -->
+            <!-- end for loop here -->
+
+          </td>
+        </tr>
+        <tr>
+          <td></td> <!-- insert submit here -->
+        </tr>
+      </tbody>
+    </table>
+  </form>
+
+{% endblock %}
